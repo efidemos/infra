@@ -1,0 +1,21 @@
+apiVersion: tanuu.fi/v1alpha1
+kind: Cluster
+metadata:
+  name: demo-efi
+  namespace: default
+  annotations:
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-release.sh
+spec:
+  id: demo-efi
+  parameters:
+    version: "1.26"
+    nodes:
+      count: 3
+      size: small
+    services:
+      operators:
+        prometheus:
+          version: "34.5.1"
+  writeConnectionSecretToRef:
+    name: demo-efi-kubeconfig
+    namespace: default
