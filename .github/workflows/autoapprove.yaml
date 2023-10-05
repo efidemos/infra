@@ -1,14 +1,25 @@
-name: Auto approve
+name: Enable automerge on dependabot PRs
 
-on: pull_request_target
+on:
+  # See note below about using pull_request_target
+  pull_request_target:
 
 jobs:
-  auto-approve:
+  automerge:
+    name: Enable automerge on dependabot PRs
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    if: github.actor == 'tanuudemouser'
     steps:
-      - uses: hmarr/auto-approve-action@v3
+      - name: Enable automerge on dependabot PRs
+        uses: daneden/enable-automerge-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # A personal access token that you have generated and saved in the
+          # repo or org’s encrypted secrets
+          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+          # The name of the PR author to enable automerge for
+          # Defaults to dependabot[bot]
+          allowed-author: "tanuudemouser"
+
+          # Allowed values: MERGE | SQUASH | REBASE
+          # Defaults to MERGE
+          merge-method: MERGE
