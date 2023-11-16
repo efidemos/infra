@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "DemoAZ2"
+  description: "Demo for AZ teams"
+  links:
+    - url:  https://github.com/efidemos/infra
+      title: GitHub Repo
+      icon: github
+spec:
+  type: environment
+  lifecycle: experimental
+  owner: TechServices
